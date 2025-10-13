@@ -24,7 +24,7 @@
         }
         
         /* Using a specific font for headings */
-        h1, h3 {
+        h1, h2, h3 {
             font-family: 'Chakra Petch', sans-serif;
         }
 
@@ -32,14 +32,26 @@
             background-color: rgba(31, 41, 55, 0.5); /* bg-gray-800 with opacity */
             border: 1px solid #4b5563; /* border-gray-600 */
             backdrop-filter: blur(8px); /* Frosted glass effect */
-            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.4s ease, max-height 0.5s ease-in-out, margin 0.5s, padding 0.5s;
+            overflow: hidden;
+            max-height: 1000px; /* Large value to prevent clipping, used for filter animation */
         }
         .poster-card:hover {
             transform: translateY(-8px) skewX(-3deg); /* More dynamic hover */
             border-color: #a78bfa; /* violet-400 */
             box-shadow: 0 0 25px rgba(167, 139, 250, 0.4); /* Neon purple glow */
         }
-        
+        .poster-card.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            max-height: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-width: 0;
+        }
+
         /* Modal styles */
         #modal {
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -83,29 +95,35 @@
             animation: glitch-anim2 5s infinite linear alternate-reverse;
         }
         @keyframes glitch-anim {
-            0% { clip-path: polygon(0 2%, 100% 2%, 100% 23%, 0 23%); }
-            5% { clip-path: polygon(0 63%, 100% 63%, 100% 88%, 0 88%); }
-            /* ... more steps ... */
-            100% { clip-path: polygon(0 42%, 100% 42%, 100% 58%, 0 58%); }
+            0% { clip-path: polygon(0 2%, 100% 2%, 100% 23%, 0 23%); } 5% { clip-path: polygon(0 63%, 100% 63%, 100% 88%, 0 88%); } 100% { clip-path: polygon(0 42%, 100% 42%, 100% 58%, 0 58%); }
         }
         @keyframes glitch-anim2 {
-            0% { clip-path: polygon(0 67%, 100% 67%, 100% 89%, 0 89%); }
-            6% { clip-path: polygon(0 8%, 100% 8%, 100% 38%, 0 38%); }
-            /* ... more steps ... */
-            100% { clip-path: polygon(0 55%, 100% 55%, 100% 64%, 0 64%); }
+            0% { clip-path: polygon(0 67%, 100% 67%, 100% 89%, 0 89%); } 6% { clip-path: polygon(0 8%, 100% 8%, 100% 38%, 0 38%); } 100% { clip-path: polygon(0 55%, 100% 55%, 100% 64%, 0 64%); }
         }
          @keyframes glitch-skew {
-            0% { transform: skew(0deg); }
-            1% { transform: skew(1deg); }
-            2% { transform: skew(0deg); }
-            3% { transform: skew(-1deg); }
-            4% { transform: skew(0deg); }
-            100% { transform: skew(0deg); }
+            0% { transform: skew(0deg); } 1% { transform: skew(1deg); } 2% { transform: skew(0deg); } 3% { transform: skew(-1deg); } 4% { transform: skew(0deg); } 100% { transform: skew(0deg); }
         }
 
         /* Back to top button */
         #to-top-button {
             transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        /* Filter button styles */
+        .filter-btn {
+            background-color: rgba(31, 41, 55, 0.5);
+            border: 1px solid #4b5563;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+        .filter-btn:hover {
+            background-color: rgba(55, 65, 81, 0.7);
+            border-color: #6b7280;
+        }
+        .filter-btn.active {
+            background-color: #a78bfa;
+            border-color: #a78bfa;
+            color: #111827;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -119,18 +137,35 @@
         </div>
     </header>
 
-    <!-- Main Content: Poster Gallery -->
+    <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
         <p class="text-center text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
             Welcome to my personal gallery. Each poster here represents a story, a burst of creativity, or a design challenge I was excited to tackle. Click on any poster to see a larger version and learn more about it.
         </p>
+        
+        <!-- About Me Section -->
+        <section id="about" class="mb-16 p-8 rounded-lg border border-gray-700 bg-gray-800/50 backdrop-blur-md">
+            <h2 class="text-2xl font-bold text-violet-400 text-center mb-4">ABOUT THE ARTIST</h2>
+            <p class="text-center max-w-3xl mx-auto text-gray-400">
+                I'm a digital artist and graphic designer with a passion for blending futuristic aesthetics with modern typography. This space is my visual playground, a collection of personal projects, experiments, and client work. My goal is to push creative boundaries and explore new techniques in digital art.
+            </p>
+        </section>
+
+        <!-- Filter Buttons -->
+        <div id="filter-container" class="flex justify-center flex-wrap gap-2 md:gap-4 mb-12">
+            <button class="filter-btn active px-4 py-2 rounded-md text-sm font-medium" data-filter="all">ALL</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="glass">LIQUID GLASS</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="ai">AI EXPERIMENTS</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="typography">TYPOGRAPHY</button>
+        </div>
+
 
         <!-- Responsive Grid for Posters -->
         <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             
             <!-- Poster 1 -->
-            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img loading="lazy" src="posters/Yeat.png" alt="Yeat" class="w-full h-auto object-cover" data-large-src="posters/Yeat.png">
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" data-category="glass" onclick="openModal(this)">
+                <img loading="lazy" src="posters/Yeat.png" alt="Yeat" class="w-full h-auto" data-large-src="posters/Yeat.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Yeat - Comë n Go</h3>
                     <p class="text-gray-400 mt-1">A test with Apple's Liquid Glass technique.</p>
@@ -138,17 +173,17 @@
             </div>
 
             <!-- Poster 2 -->
-            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img loading="lazy" src="posters/a4color_esdeekid.png" alt="EsDeeKid" class="w-full h-auto object-cover" data-large-src="posters/a4color_esdeekid.png">
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" data-category="glass" onclick="openModal(this)">
+                <img loading="lazy" src="posters/a4color_esdeekid.png" alt="EsDeeKid" class="w-full h-auto" data-large-src="posters/a4color_esdeekid.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">EsDeeKid - Cali Man</h3>
                     <p class="text-gray-400 mt-1">Again with the liquid glass.</p>
                 </div>
             </div>
 
-            <!-- Poster 3 -->
-            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img loading="lazy" src="posters/Tyler The Creator.png" alt="Tyler The Creator" class="w-full h-auto object-cover" data-large-src="posters/Tyler The Creator.png">
+            <!-- Poster 3: EXAMPLE OF MULTIPLE CATEGORIES -->
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" data-category="ai glass" onclick="openModal(this)">
+                <img loading="lazy" src="posters/Tyler The Creator.png" alt="Tyler The Creator" class="w-full h-auto" data-large-src="posters/Tyler The Creator.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3>
                     <p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p>
@@ -156,8 +191,8 @@
             </div>
 
             <!-- Poster 4 -->
-            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img loading="lazy" src="posters/Untitled-1.png" alt="Jessie Murph" class="w-full h-auto object-cover" data-large-src="posters/Untitled-1.png">
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" data-category="glass" onclick="openModal(this)">
+                <img loading="lazy" src="posters/Untitled-1.png" alt="Jessie Murph" class="w-full h-auto" data-large-src="posters/Untitled-1.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Jessie Murph - Always Been You</h3>
                     <p class="text-gray-400 mt-1">Taking requests from my friends and their favourite artists.</p>
@@ -165,8 +200,8 @@
             </div>
 
             <!-- Poster 5 -->
-            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img loading="lazy" src="posters/dave.png" alt="Dave" class="w-full h-auto object-cover" data-large-src="posters/dave.png">
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" data-category="typography" onclick="openModal(this)">
+                <img loading="lazy" src="posters/dave.png" alt="Dave" class="w-full h-auto" data-large-src="posters/dave.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Santan Dave - We Are All Alone In This Together</h3>
                     <p class="text-gray-400 mt-1">Typography and texture printing.</p>
@@ -174,8 +209,8 @@
             </div>
             
             <!-- Poster 6 -->
-            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img loading="lazy" src="posters/SLEEP TOKEN.png" alt="Sleep Token" class="w-full h-auto object-cover" data-large-src="posters/SLEEP TOKEN.png">
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" data-category="typography" onclick="openModal(this)">
+                <img loading="lazy" src="posters/SLEEP TOKEN.png" alt="Sleep Token" class="w-full h-auto" data-large-src="posters/SLEEP TOKEN.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Sleep Token - Infinite Baths</h3>
                     <p class="text-gray-400 mt-1">Monoprinting and digitalisation test along with lyric prints.</p>
@@ -188,6 +223,16 @@
     <!-- Footer Section -->
     <footer class="bg-gray-900/70 mt-12 border-t border-gray-700">
         <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <div class="flex justify-center gap-6 mb-6">
+                <!-- Social Icon 1: Dribbble (Example) -->
+                <a href="#" class="text-gray-500 hover:text-violet-400 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2zM5.538 16.95c.538-.962 1.637-2.31 2.394-3.508c-.75-1.125-1.462-2.5-1.462-2.5s.45-1.2 1.763-1.462c1.312-.263 3.3.637 3.3.637l.45-1.725c.188-.713-1.088-3.413-1.088-3.413s2.475 1.575 2.85 3.825c.375 2.25-1.238 4.238-1.238 4.238s-2.025.975-2.025.975l.188.713c.75 2.812 2.662 4.987 2.662 4.987c-1.5.3-5.213-1.012-6.6-4.237z" clip-rule="evenodd" /></svg>
+                </a>
+                <!-- Social Icon 2: GitHub (Example) -->
+                <a href="#" class="text-gray-500 hover:text-violet-400 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492c.5.092.682-.217.682-.482c0-.237-.009-.868-.014-1.703c-2.782.605-3.369-1.343-3.369-1.343c-.454-1.158-1.11-1.466-1.11-1.466c-.908-.62.069-.608.069-.608c1.003.07 1.531 1.032 1.531 1.032c.892 1.53 2.341 1.088 2.91.832c.092-.647.35-1.088.636-1.338c-2.22-.253-4.555-1.113-4.555-4.951c0-1.093.39-1.988 1.03-2.688c-.103-.253-.446-1.272.098-2.65c0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027c.546 1.379.203 2.398.1 2.65c.64.7 1.028 1.595 1.028 2.688c0 3.848-2.338 4.695-4.566 4.942c.359.308.678.92.678 1.855c0 1.338-.012 2.419-.012 2.747c0 .268.18.58.688.482A10.001 10.001 0 0 0 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
             <p>&copy; 2025 Postermania // All Rights Reserved.</p>
             <p class="mt-2">Signal inbound: <a href="mailto:dumitruc.rob@gmail.com" class="text-violet-400 hover:underline">dumitruc.rob@gmail.com</a></p>
         </div>
@@ -224,8 +269,9 @@
     </button>
 
 
-    <!-- JavaScript for Modal Logic -->
+    <!-- JavaScript -->
     <script>
+        // Modal Logic
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modal-img');
         const modalTitle = document.getElementById('modal-title');
@@ -236,38 +282,28 @@
             const img = element.querySelector('img');
             const title = element.querySelector('h3').innerText;
             const description = element.querySelector('p').innerText;
-
-            // Populate modal content
             modalImg.src = img.dataset.largeSrc || img.src;
             modalTitle.innerText = title;
             modalDescription.innerText = description;
-            
-            // Show modal with transitions
             document.body.classList.add('modal-open');
             modal.classList.remove('invisible', 'opacity-0');
-            setTimeout(() => {
-                modalContent.classList.remove('scale-95');
-            }, 50); // Small delay to allow CSS transitions to catch up
+            setTimeout(() => modalContent.classList.remove('scale-95'), 50);
         }
 
         function closeModal() {
-            // Hide modal with transitions
             document.body.classList.remove('modal-open');
             modalContent.classList.add('scale-95');
             modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('invisible');
-            }, 300); // Match transition duration
+            setTimeout(() => modal.classList.add('invisible'), 300);
         }
 
-        // Close modal with Escape key
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && !modal.classList.contains('invisible')) {
                 closeModal();
             }
         });
 
-        // Prevent right-click context menu on all images
+        // Image Protection
         document.addEventListener('contextmenu', event => {
             if (event.target.tagName === 'IMG') {
                 event.preventDefault();
@@ -276,7 +312,6 @@
 
         // Back to Top Button Logic
         const toTopButton = document.getElementById('to-top-button');
-
         window.addEventListener('scroll', () => {
             if (window.scrollY > 200) {
                 toTopButton.classList.remove('invisible', 'opacity-0');
@@ -284,12 +319,32 @@
                 toTopButton.classList.add('invisible', 'opacity-0');
             }
         });
-
         toTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Filter Logic
+        const filterContainer = document.getElementById('filter-container');
+        const galleryItems = document.querySelectorAll('#gallery .poster-card');
+
+        filterContainer.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                // Update active button
+                filterContainer.querySelector('.active').classList.remove('active');
+                event.target.classList.add('active');
+
+                const filterValue = event.target.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    const itemCategories = item.getAttribute('data-category').split(' '); // Split categories into an array
+                    // Check if the item's categories array includes the filter value
+                    if (filterValue === 'all' || itemCategories.includes(filterValue)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            }
         });
     </script>
 
