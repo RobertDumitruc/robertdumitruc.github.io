@@ -55,6 +55,58 @@
         body.modal-open {
             overflow: hidden;
         }
+
+        /* Glitch effect for the main heading */
+        #glitch-heading {
+            position: relative;
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+        #glitch-heading::before,
+        #glitch-heading::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #glitch-heading::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        #glitch-heading::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip-path: polygon(0 2%, 100% 2%, 100% 23%, 0 23%); }
+            5% { clip-path: polygon(0 63%, 100% 63%, 100% 88%, 0 88%); }
+            /* ... more steps ... */
+            100% { clip-path: polygon(0 42%, 100% 42%, 100% 58%, 0 58%); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip-path: polygon(0 67%, 100% 67%, 100% 89%, 0 89%); }
+            6% { clip-path: polygon(0 8%, 100% 8%, 100% 38%, 0 38%); }
+            /* ... more steps ... */
+            100% { clip-path: polygon(0 55%, 100% 55%, 100% 64%, 0 64%); }
+        }
+         @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            1% { transform: skew(1deg); }
+            2% { transform: skew(0deg); }
+            3% { transform: skew(-1deg); }
+            4% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        /* Back to top button */
+        #to-top-button {
+            transition: opacity 0.3s, visibility 0.3s;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
@@ -62,7 +114,7 @@
     <!-- Header Section -->
     <header class="sticky top-0 z-20 bg-gray-900/70 backdrop-blur-md border-b border-gray-700">
         <div class="container mx-auto px-6 py-4">
-            <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wider">POSTERMANIA</h1>
+            <h1 id="glitch-heading" data-text="POSTERMANIA" class="text-2xl md:text-3xl font-bold text-white tracking-wider">POSTERMANIA</h1>
             <p class="mt-1 text-gray-400">Declassified design projects and visual experiments.</p>
         </div>
     </header>
@@ -78,7 +130,7 @@
             
             <!-- Poster 1 -->
             <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img src="posters/Yeat.png" alt="Yeat" class="w-full h-auto object-cover" data-large-src="posters/Yeat.png">
+                <img loading="lazy" src="posters/Yeat.png" alt="Yeat" class="w-full h-auto object-cover" data-large-src="posters/Yeat.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Yeat - Comë n Go</h3>
                     <p class="text-gray-400 mt-1">A test with Apple's Liquid Glass technique.</p>
@@ -87,7 +139,7 @@
 
             <!-- Poster 2 -->
             <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img src="posters/a4color_esdeekid.png" alt="EsDeeKid" class="w-full h-auto object-cover" data-large-src="posters/a4color_esdeekid.png">
+                <img loading="lazy" src="posters/a4color_esdeekid.png" alt="EsDeeKid" class="w-full h-auto object-cover" data-large-src="posters/a4color_esdeekid.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">EsDeeKid - Cali Man</h3>
                     <p class="text-gray-400 mt-1">Again with the liquid glass.</p>
@@ -96,7 +148,7 @@
 
             <!-- Poster 3 -->
             <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img src="posters/Tyler The Creator.png" alt="Tyler The Creator" class="w-full h-auto object-cover" data-large-src="posters/Tyler The Creator.png">
+                <img loading="lazy" src="posters/Tyler The Creator.png" alt="Tyler The Creator" class="w-full h-auto object-cover" data-large-src="posters/Tyler The Creator.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3>
                     <p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p>
@@ -105,7 +157,7 @@
 
             <!-- Poster 4 -->
             <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img src="posters/Untitled-1.png" alt="Jessie Murph" class="w-full h-auto object-cover" data-large-src="posters/Untitled-1.png">
+                <img loading="lazy" src="posters/Untitled-1.png" alt="Jessie Murph" class="w-full h-auto object-cover" data-large-src="posters/Untitled-1.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Jessie Murph - Always Been You</h3>
                     <p class="text-gray-400 mt-1">Taking requests from my friends and their favourite artists.</p>
@@ -114,7 +166,7 @@
 
             <!-- Poster 5 -->
             <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img src="posters/dave.png" alt="Dave" class="w-full h-auto object-cover" data-large-src="posters/dave.png">
+                <img loading="lazy" src="posters/dave.png" alt="Dave" class="w-full h-auto object-cover" data-large-src="posters/dave.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Santan Dave - We Are All Alone In This Together</h3>
                     <p class="text-gray-400 mt-1">Typography and texture printing.</p>
@@ -123,7 +175,7 @@
             
             <!-- Poster 6 -->
             <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
-                <img src="posters/SLEEP TOKEN.png" alt="Sleep Token" class="w-full h-auto object-cover" data-large-src="posters/SLEEP TOKEN.png">
+                <img loading="lazy" src="posters/SLEEP TOKEN.png" alt="Sleep Token" class="w-full h-auto object-cover" data-large-src="posters/SLEEP TOKEN.png">
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-violet-400">Sleep Token - Infinite Baths</h3>
                     <p class="text-gray-400 mt-1">Monoprinting and digitalisation test along with lyric prints.</p>
@@ -163,6 +215,14 @@
             </div>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="to-top-button" class="fixed bottom-5 right-5 bg-violet-500/50 text-white p-3 rounded-full shadow-lg hover:bg-violet-500/80 backdrop-blur-sm border border-violet-400 invisible opacity-0">
+         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
 
     <!-- JavaScript for Modal Logic -->
     <script>
@@ -212,6 +272,24 @@
             if (event.target.tagName === 'IMG') {
                 event.preventDefault();
             }
+        });
+
+        // Back to Top Button Logic
+        const toTopButton = document.getElementById('to-top-button');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                toTopButton.classList.remove('invisible', 'opacity-0');
+            } else {
+                toTopButton.classList.add('invisible', 'opacity-0');
+            }
+        });
+
+        toTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     </script>
 
