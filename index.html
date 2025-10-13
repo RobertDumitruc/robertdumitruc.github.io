@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postermania</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Chakra Petch for headings, Space Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the new theme */
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #111827; /* Dark background (bg-gray-900) */
+            /* Subtle grid pattern for a techy look */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        /* Using a specific font for headings */
+        h1, h3 {
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        .poster-card {
+            background-color: rgba(31, 41, 55, 0.5); /* bg-gray-800 with opacity */
+            border: 1px solid #4b5563; /* border-gray-600 */
+            backdrop-filter: blur(8px); /* Frosted glass effect */
+            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .poster-card:hover {
+            transform: translateY(-8px) skewX(-3deg); /* More dynamic hover */
+            border-color: #a78bfa; /* violet-400 */
+            box-shadow: 0 0 25px rgba(167, 139, 250, 0.4); /* Neon purple glow */
+        }
+        
+        /* Modal styles */
+        #modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #modal-content {
+            border: 1px solid #a78bfa; /* violet-400 */
+            background-color: #1f2937; /* bg-gray-800 */
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 30px rgba(167, 139, 250, 0.5); /* Neon purple glow */
+        }
+        
+        /* Style for hiding scrollbar when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <!-- Header Section -->
+    <header class="sticky top-0 z-20 bg-gray-900/70 backdrop-blur-md border-b border-gray-700">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wider">POSTERMANIA</h1>
+            <p class="mt-1 text-gray-400">Declassified design projects and visual experiments.</p>
+        </div>
+    </header>
+
+    <!-- Main Content: Poster Gallery -->
+    <main class="container mx-auto px-6 py-12">
+        <p class="text-center text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+            Welcome to my personal gallery. Each poster here represents a story, a burst of creativity, or a design challenge I was excited to tackle. Click on any poster to see a larger version and learn more about it.
+        </p>
+
+        <!-- Responsive Grid for Posters -->
+        <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            
+            <!-- Poster 1 -->
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
+                <img src="posters/Yeat.png" alt="Yeat" class="w-full h-auto object-cover" data-large-src="posters/Yeat.png">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">Yeat - Comë n Go</h3>
+                    <p class="text-gray-400 mt-1">A test with Apple's Liquid Glass technique.</p>
+                </div>
+            </div>
+
+            <!-- Poster 2 -->
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
+                <img src="posters/a4color_esdeekid.png" alt="EsDeeKid" class="w-full h-auto object-cover" data-large-src="posters/a4color_esdeekid.png">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">EsDeeKid - Cali Man</h3>
+                    <p class="text-gray-400 mt-1">Again with the liquid glass.</p>
+                </div>
+            </div>
+
+            <!-- Poster 3 -->
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
+                <img src="posters/Tyler The Creator.png" alt="Tyler The Creator" class="w-full h-auto object-cover" data-large-src="posters/Tyler The Creator.png">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3>
+                    <p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p>
+                </div>
+            </div>
+
+            <!-- Poster 4 -->
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
+                <img src="posters/Untitled-1.png" alt="Jessie Murph" class="w-full h-auto object-cover" data-large-src="posters/Untitled-1.png">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">Jessie Murph - Always Been You</h3>
+                    <p class="text-gray-400 mt-1">Taking requests from my friends and their favourite artists.</p>
+                </div>
+            </div>
+
+            <!-- Poster 5 -->
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
+                <img src="posters/dave.png" alt="Dave" class="w-full h-auto object-cover" data-large-src="posters/dave.png">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">Santan Dave - We Are All Alone In This Together</h3>
+                    <p class="text-gray-400 mt-1">Typography and texture printing.</p>
+                </div>
+            </div>
+            
+            <!-- Poster 6 -->
+            <div class="poster-card rounded-lg overflow-hidden cursor-pointer" onclick="openModal(this)">
+                <img src="posters/SLEEP TOKEN.png" alt="Sleep Token" class="w-full h-auto object-cover" data-large-src="posters/SLEEP TOKEN.png">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">Sleep Token - Infinite Baths</h3>
+                    <p class="text-gray-400 mt-1">Monoprinting and digitalisation test along with lyric prints.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900/70 mt-12 border-t border-gray-700">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2024 Your Name // All Rights Reserved.</p>
+            <p class="mt-2">Signal inbound: <a href="mailto:hello@example.com" class="text-violet-400 hover:underline">hello@example.com</a></p>
+        </div>
+    </footer>
+
+    <!-- Modal / Lightbox -->
+    <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm invisible opacity-0" onclick="closeModal()">
+        <div id="modal-content" class="relative rounded-lg shadow-2xl max-w-3xl w-11/12 max-h-[90vh] flex flex-col md:flex-row transform scale-95" onclick="event.stopPropagation()">
+            <!-- Close button -->
+            <button onclick="closeModal()" class="absolute -top-4 -right-4 bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-700 border border-violet-400 transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <!-- Modal Image -->
+            <div class="md:w-2/3 flex-shrink-0">
+                <img id="modal-img" src="" alt="Enlarged Poster" class="rounded-t-lg md:rounded-l-lg md:rounded-t-none w-full h-full object-contain bg-black/20">
+            </div>
+
+            <!-- Modal Text Content -->
+            <div class="p-6 flex flex-col justify-center md:w-1/3">
+                <h3 id="modal-title" class="text-2xl font-bold text-violet-400"></h3>
+                <p id="modal-description" class="text-gray-300 mt-2"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Modal Logic -->
+    <script>
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal(element) {
+            const img = element.querySelector('img');
+            const title = element.querySelector('h3').innerText;
+            const description = element.querySelector('p').innerText;
+
+            // Populate modal content
+            modalImg.src = img.dataset.largeSrc || img.src;
+            modalTitle.innerText = title;
+            modalDescription.innerText = description;
+            
+            // Show modal with transitions
+            document.body.classList.add('modal-open');
+            modal.classList.remove('invisible', 'opacity-0');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95');
+            }, 50); // Small delay to allow CSS transitions to catch up
+        }
+
+        function closeModal() {
+            // Hide modal with transitions
+            document.body.classList.remove('modal-open');
+            modalContent.classList.add('scale-95');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('invisible');
+            }, 300); // Match transition duration
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modal.classList.contains('invisible')) {
+                closeModal();
+            }
+        });
+
+        // Prevent right-click context menu on all images
+        document.addEventListener('contextmenu', event => {
+            if (event.target.tagName === 'IMG') {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
