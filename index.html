@@ -154,24 +154,41 @@
         </div>
     </main>
     
-    <!-- Contact Form Section -->
+    <!-- Poster Request Form Section -->
     <section id="contact" class="container mx-auto px-6 py-12">
         <div class="p-8 rounded-lg border border-gray-700 bg-gray-800/50 backdrop-blur-md max-w-3xl mx-auto">
-            <h2 class="text-2xl font-bold text-violet-400 text-center mb-6">GET IN TOUCH</h2>
+            <h2 class="text-2xl font-bold text-violet-400 text-center mb-2">REQUEST A POSTER</h2>
+            <p class="text-center text-gray-400 mb-6">Have an idea for a poster? Fill out the form below and I'll consider it for a future design. (with credits towards you)</p>
             <form action="https://formspree.io/f/mwprwrzj" method="POST" class="space-y-6">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                    <input type="text" name="name" id="name" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="artist" class="block text-sm font-medium text-gray-400 mb-2">Artist Name</label>
+                        <input type="text" name="artist" id="artist" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                    </div>
+                    <div>
+                        <label for="album" class="block text-sm font-medium text-gray-400 mb-2">Album / Single Name</label>
+                        <input type="text" name="album" id="album" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                    </div>
                 </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="song" class="block text-sm font-medium text-gray-400 mb-2">Specific Song (Optional)</label>
+                        <input type="text" name="song" id="song" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                    </div>
+                    <div>
+                        <label for="style" class="block text-sm font-medium text-gray-400 mb-2">Desired Style (e.g., Liquid Glass, Vintage)</label>
+                        <input type="text" name="style" id="style" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                    </div>
+                </div>
+                 <div>
+                    <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Your Email (To notify you if it gets made)</label>
                     <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                 </div>
                 <div>
-                    <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                    <textarea name="message" id="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition"></textarea>
+                    <label for="details" class="block text-sm font-medium text-gray-400 mb-2">Additional Details</label>
+                    <textarea name="details" id="details" rows="4" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition"></textarea>
                 </div>
-                <button type="submit" class="w-full filter-btn active px-4 py-3 rounded-md font-bold">SEND MESSAGE</button>
+                <button type="submit" class="w-full filter-btn active px-4 py-3 rounded-md font-bold">SUBMIT REQUEST</button>
             </form>
         </div>
     </section>
@@ -183,7 +200,7 @@
                 <a href="#" class="text-gray-500 hover:text-violet-400 transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492c.5.092.682-.217.682-.482c0-.237-.009-.868-.014-1.703c-2.782.605-3.369-1.343-3.369-1.343c-.454-1.158-1.11-1.466-1.11-1.466c-.908-.62.069-.608.069-.608c1.003.07 1.531 1.032 1.531 1.032c.892 1.53 2.341 1.088 2.91.832c.092-.647.35-1.088.636-1.338c-2.22-.253-4.555-1.113-4.555-4.951c0-1.093.39-1.988 1.03-2.688c-.103-.253-.446-1.272.098-2.65c0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027c.546 1.379.203 2.398.1 2.65c.64.7 1.028 1.595 1.028 2.688c0 3.848-2.338 4.695-4.566 4.942c.359.308.678.92.678 1.855c0 1.338-.012 2.419-.012 2.747c0 .268.18.58.688.482A10.001 10.001 0 0 0 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg></a>
             </div>
             <p>&copy; 2025 Postermania // All Rights Reserved.</p>
-            <p class="mt-2">Signal inbound: <a href="mailto:dumitruc.rob@gmail.com" class="text-violet-400 hover:underline">dumitruc.rob@gmail.com</a></p>
+            <!--<p class="mt-2">Signal inbound: <a href="mailto:dumitruc.rob@gmail.com" class="text-violet-400 hover:underline">dumitruc.rob@gmail.com</a></p>-->
         </div>
     </footer>
 
