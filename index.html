@@ -139,6 +139,11 @@
                 <img loading="lazy" src="posters/Tyler The Creator.png" alt="Tyler The Creator" class="w-full h-auto" data-large-src="posters/Tyler The Creator.png">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3><p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p></div>
             </div>
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" onclick="openModal(this)">
+                <img loading="lazy" src="posters/heavyweight.png" alt="Yeat" class="w-full h-auto" data-large-src="posters/heavyweight.png">
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Yeat - Hëavyweight</h3><p class="text-gray-400 mt-1">Full brainstorming.</p></div>
+            </div>
+
             <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" onclick="openModal(this)">
                 <img loading="lazy" src="posters/Untitled-1.png" alt="Jessie Murph" class="w-full h-auto" data-large-src="posters/Untitled-1.png">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Jessie Murph - Always Been You</h3><p class="text-gray-400 mt-1">Taking requests from my friends and their favourite artists.</p></div>
@@ -162,17 +167,17 @@
             <form action="https://formspree.io/f/mwprwrzj" method="POST" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="Artist" class="block text-sm font-medium text-gray-400 mb-2">Artist Name</label>
+                        <label for="artist" class="block text-sm font-medium text-gray-400 mb-2">Artist Name</label>
                         <input type="text" name="artist" id="artist" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                     <div>
-                        <label for="Album" class="block text-sm font-medium text-gray-400 mb-2">Album / Single Name</label>
+                        <label for="album" class="block text-sm font-medium text-gray-400 mb-2">Album / Single Name</label>
                         <input type="text" name="album" id="album" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                 </div>
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="Song" class="block text-sm font-medium text-gray-400 mb-2">Specific Song (Optional)</label>
+                        <label for="song" class="block text-sm font-medium text-gray-400 mb-2">Specific Song (Optional)</label>
                         <input type="text" name="song" id="song" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                     <div>
@@ -181,11 +186,11 @@
                     </div>
                 </div>
                  <div>
-                    <label for="Email" class="block text-sm font-medium text-gray-400 mb-2">Your Email (To notify you if it gets made)</label>
+                    <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Your Email (To notify you if it gets made)</label>
                     <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                 </div>
                 <div>
-                    <label for="Details" class="block text-sm font-medium text-gray-400 mb-2">Additional Details</label>
+                    <label for="details" class="block text-sm font-medium text-gray-400 mb-2">Additional Details</label>
                     <textarea name="details" id="details" rows="4" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition"></textarea>
                 </div>
                 <button type="submit" class="w-full filter-btn active px-4 py-3 rounded-md font-bold">SUBMIT REQUEST</button>
@@ -351,5 +356,4 @@
     </script>
 </body>
 </html>
-
 
