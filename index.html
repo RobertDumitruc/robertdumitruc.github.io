@@ -26,90 +26,56 @@
         h1, h2, h3 { font-family: 'Chakra Petch', sans-serif; }
 
         /* --- Interactive Cursor Styles --- */
-        .cursor-dot, .cursor-outline {
-            display: none; /* Hidden by default for touch devices */
-        }
+        .cursor-dot, .cursor-outline { display: none; }
         
         @media (hover: hover) and (pointer: fine) {
-            body {
-                cursor: none; /* Hide the default cursor only on hover-capable devices */
-            }
+            body { cursor: none; }
             .cursor-dot, .cursor-outline {
-                display: block;
-                position: fixed;
-                top: 0;
-                left: 0;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                z-index: 9999;
-                pointer-events: none;
+                display: block; position: fixed; top: 0; left: 0;
+                transform: translate(-50%, -50%); border-radius: 50%;
+                z-index: 9999; pointer-events: none;
                 transition: transform 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out;
             }
             .cursor-dot {
-                width: 8px;
-                height: 8px;
-                background-color: #a78bfa;
+                width: 8px; height: 8px; background-color: #a78bfa;
                 box-shadow: 0 0 10px #a78bfa, 0 0 20px #a78bfa;
             }
             .cursor-outline {
-                width: 40px;
-                height: 40px;
-                border: 2px solid rgba(167, 139, 250, 0.5);
+                width: 40px; height: 40px; border: 2px solid rgba(167, 139, 250, 0.5);
             }
             body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-dot {
                 transform: translate(-50%, -50%) scale(0.5);
             }
             body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-outline {
-                transform: translate(-50%, -50%) scale(1.5);
-                border-color: rgba(167, 139, 250, 1);
+                transform: translate(-50%, -50%) scale(1.5); border-color: rgba(167, 139, 250, 1);
             }
         }
 
-
         .poster-card {
-            position: relative; /* Required for the "new" indicator */
-            background-color: rgba(31, 41, 55, 0.5);
-            border: 1px solid #4b5563;
+            position: relative;
+            background-color: rgba(31, 41, 55, 0.5); border: 1px solid #4b5563;
             backdrop-filter: blur(8px);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease, max-height 0.5s ease, margin 0.5s, padding 0.5s;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
             overflow: hidden;
-            max-height: 1000px;
         }
         .poster-card:hover {
-            transform: translateY(-8px) skewX(-3deg);
-            border-color: #a78bfa;
+            transform: translateY(-8px); border-color: #a78bfa;
             box-shadow: 0 0 25px rgba(167, 139, 250, 0.4);
         }
         .poster-card.hidden {
-            opacity: 0; transform: scale(0.9); max-height: 0;
-            margin-top: 0; margin-bottom: 0; padding-top: 0;
-            padding-bottom: 0; border-width: 0;
+            display: none;
         }
 
-        /* "New" Indicator styles */
         .new-indicator {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 24px;
-            height: 24px;
-            background-color: #a78bfa;
-            color: #111827;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
-            z-index: 10;
+            position: absolute; top: 12px; right: 12px; width: 24px; height: 24px;
+            background-color: #a78bfa; color: #111827; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 16px; z-index: 10;
             box-shadow: 0 0 10px rgba(167, 139, 250, 0.7);
             transition: opacity 0.3s ease, transform 0.3s ease;
             transform: scale(1);
         }
-        .poster-card.viewed .new-indicator {
-            opacity: 0;
-            transform: scale(0);
-        }
+        .poster-card.viewed .new-indicator { opacity: 0; transform: scale(0); }
 
         #modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
         #modal-content {
@@ -120,62 +86,58 @@
         
         body.modal-open { overflow: hidden; }
 
-        /* Scroll Animation Styles */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
         #glitch-heading { position: relative; animation: glitch-skew 1s infinite linear alternate-reverse; }
-        #glitch-heading::before, #glitch-heading::after {
-            content: attr(data-text); position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
-        #glitch-heading::before {
-            left: 2px; text-shadow: -2px 0 #ff00c1;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-        #glitch-heading::after {
-            left: -2px; text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
-            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
-        }
+        #glitch-heading::before, #glitch-heading::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        #glitch-heading::before { left: 2px; text-shadow: -2px 0 #ff00c1; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); animation: glitch-anim 5s infinite linear alternate-reverse; }
+        #glitch-heading::after { left: -2px; text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1; clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%); animation: glitch-anim2 5s infinite linear alternate-reverse; }
         @keyframes glitch-anim { 0% { clip-path: polygon(0 2%, 100% 2%, 100% 23%, 0 23%); } 5% { clip-path: polygon(0 63%, 100% 63%, 100% 88%, 0 88%); } 100% { clip-path: polygon(0 42%, 100% 42%, 100% 58%, 0 58%); } }
         @keyframes glitch-anim2 { 0% { clip-path: polygon(0 67%, 100% 67%, 100% 89%, 0 89%); } 6% { clip-path: polygon(0 8%, 100% 8%, 100% 38%, 0 38%); } 100% { clip-path: polygon(0 55%, 100% 55%, 100% 64%, 0 64%); } }
         @keyframes glitch-skew { 0% { transform: skew(0deg); } 1% { transform: skew(1deg); } 2% { transform: skew(0deg); } 3% { transform: skew(-1deg); } 4% { transform: skew(0deg); } 100% { transform: skew(0deg); } }
 
         #to-top-button { transition: opacity 0.3s, visibility 0.3s; }
 
-        .filter-btn {
-            background-color: rgba(31, 41, 55, 0.5); border: 1px solid #4b5563;
-            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-        }
+        .filter-btn { background-color: rgba(31, 41, 55, 0.5); border: 1px solid #4b5563; transition: background-color 0.3s, border-color 0.3s, color 0.3s; }
         .filter-btn:hover { background-color: rgba(55, 65, 81, 0.7); border-color: #6b7280; }
-        .filter-btn.active {
-            background-color: #a78bfa; border-color: #a78bfa;
-            color: #111827; font-weight: bold;
-        }
+        .filter-btn.active { background-color: #a78bfa; border-color: #a78bfa; color: #111827; font-weight: bold; }
 
-        /* --- Transmission Log Styles --- */
-        #transmission-log h2::after {
+        #transmission-log h2::after { content: '_'; animation: blink 1s step-end infinite; color: #a78bfa; }
+        @keyframes blink { 50% { opacity: 0; } }
+        #transmission-log li { opacity: 0; transition: opacity 0.5s ease; }
+
+        .tool-tag { background-color: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.3); color: #a78bfa; padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; text-transform: uppercase; }
+        
+        /* --- Preloader Styles --- */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: #111827;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            color: #a78bfa;
+            font-size: 1.25rem;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        #preloader.hidden { opacity: 0; pointer-events: none; }
+        #preloader-text::after {
             content: '_';
             animation: blink 1s step-end infinite;
-            color: #a78bfa;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-        #transmission-log li {
-            opacity: 0;
-            transition: opacity 0.5s ease;
         }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <span id="preloader-text">DECRYPTING_FILES...</span>
+    </div>
 
     <!-- Custom Cursor -->
     <div class="cursor-outline"></div>
@@ -213,7 +175,7 @@
         <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             
              <!-- NEW Full-Width Poster Placeholder -->
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-poster-id="featured-2" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-poster-id="featured-2" data-tools="Photoshop,Illustrator" onclick="openModal(this)">
                 <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/featured2.png" alt="Featured2" class="w-full h-auto" data-large-src="posters/featured2.png">
                 <div class="p-5">
@@ -223,7 +185,7 @@
             </div>
 
             <!-- OLD Featured Poster (Now Archived from main view) -->
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-main-visible="false" data-poster-id="featured-1" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-main-visible="false" data-poster-id="featured-1" data-tools="Photoshop" onclick="openModal(this)">
                 <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/featured.png" alt="Featured" class="w-full h-auto" data-large-src="posters/featured.png">
                 <div class="p-5">
@@ -233,41 +195,51 @@
             </div>
 
 
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-1" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-1" data-tools="Monoprint,Photoshop" onclick="openModal(this)">
                 <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/SLEEP TOKEN.jpg" alt="Sleep Token" class="w-full h-auto" data-large-src="posters/SLEEP TOKEN.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Sleep Token - Infinite Baths</h3><p class="text-gray-400 mt-1">Monoprinting and digitalisation test along with lyric prints.</p></div>
             </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-2" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-2" data-tools="Photoshop" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/a4color_esdeekid.jpg" alt="EsDeeKid" class="w-full h-auto" data-large-src="posters/a4color_esdeekid.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">EsDeeKid - Cali Man</h3><p class="text-gray-400 mt-1">Again with the liquid glass.</p></div>
             </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="ai glass" data-poster-id="poster-3" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="ai glass" data-poster-id="poster-3" data-tools="Photoshop,AI-Generated" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/Tyler The Creator.jpg" alt="Tyler The Creator" class="w-full h-auto" data-large-src="posters/Tyler The Creator.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3><p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p></div>
             </div>
 
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-4" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-4" data-tools="Photoshop" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/heavyweight.jpg" alt="Yeat" class="w-full h-auto" data-large-src="posters/heavyweight.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Yeat - Hëavyweight</h3><p class="text-gray-400 mt-1">Full brainstorming.</p></div>
             </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-5" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-5" data-tools="Photoshop" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/Untitled-1.jpg" alt="Jessie Murph" class="w-full h-auto" data-large-src="posters/Untitled-1.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Jessie Murph - Always Been You</h3><p class="text-gray-400 mt-1">Taking requests from my friends and their favourite artists.</p></div>
             </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-6" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-6" data-tools="Photoshop" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/dave.jpg" alt="Dave" class="w-full h-auto" data-large-src="posters/dave.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Santan Dave - We Are All Alone In This Together</h3><p class="text-gray-400 mt-1">Typography and texture printing.</p></div>
             </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-7" onclick="openModal(this)">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-7" data-tools="Photoshop" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/Yeat.jpg" alt="Yeat" class="w-full h-auto" data-large-src="posters/Yeat.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Yeat - Comë n Go</h3><p class="text-gray-400 mt-1">A test with Apple's Liquid Glass technique.</p></div>
+            </div>
+
+            <!-- Secret Konami Code Poster -->
+            <div id="secret-poster" class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer hidden" data-category="featured" data-main-visible="false" data-poster-id="secret-1" data-tools="Classified" onclick="openModal(this)">
+                <span class="new-indicator">!</span>
+                <img loading="lazy" src="https://placehold.co/800x1200/a78bfa/111827?text=SECRET" alt="Secret Poster" class="w-full h-auto" data-large-src="https://placehold.co/800x1200/a78bfa/111827?text=SECRET">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">ACCESS_GRANTED</h3>
+                    <p class="text-gray-400 mt-1">You found the hidden file. Good work, agent.</p>
+                </div>
             </div>
         </div>
     </main>
@@ -348,6 +320,10 @@
             <div class="p-6 md:flex flex-col justify-center md:w-1/3 hidden">
                 <h3 id="modal-title" class="text-2xl font-bold text-violet-400"></h3>
                 <p id="modal-description" class="text-gray-300 mt-2"></p>
+                <div id="modal-tools" class="mt-4">
+                    <h4 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">Process & Tools</h4>
+                    <div id="modal-tools-container" class="flex flex-wrap gap-2"></div>
+                </div>
             </div>
         </div>
         <!-- Lightbox Navigation -->
@@ -373,12 +349,14 @@
         const modalDescription = document.getElementById('modal-description');
         const modalTitleMobile = document.getElementById('modal-title-mobile');
         const modalDescriptionMobile = document.getElementById('modal-description-mobile');
+        const modalToolsContainer = document.getElementById('modal-tools-container');
         const modalContent = document.getElementById('modal-content');
         const toTopButton = document.getElementById('to-top-button');
         const filterContainer = document.getElementById('filter-container');
         const gallery = document.getElementById('gallery');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
+        const preloader = document.getElementById('preloader');
 
         // --- State Variables ---
         let currentPosterIndex = 0;
@@ -411,12 +389,27 @@
             const img = posterElement.querySelector('img');
             const title = posterElement.querySelector('h3').innerText;
             const description = posterElement.querySelector('p').innerText;
+            const tools = posterElement.dataset.tools;
             
             modalImg.src = img.dataset.largeSrc || img.src;
             modalTitle.innerText = title;
             modalDescription.innerText = description;
             modalTitleMobile.innerText = title;
             modalDescriptionMobile.innerText = description;
+
+            // Update tools tags
+            modalToolsContainer.innerHTML = '';
+            if (tools) {
+                document.getElementById('modal-tools').style.display = 'block';
+                tools.split(',').forEach(tool => {
+                    const tag = document.createElement('span');
+                    tag.className = 'tool-tag';
+                    tag.textContent = tool.trim();
+                    modalToolsContainer.appendChild(tag);
+                });
+            } else {
+                 document.getElementById('modal-tools').style.display = 'none';
+            }
         }
 
         function showNextPoster() {
@@ -541,9 +534,17 @@
         
         logObserver.observe(document.getElementById('transmission-log'));
 
-
-        // --- Initial filter on page load ---
+        // --- Initial Load Logic ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Preloader
+            window.addEventListener('load', () => {
+                preloader.classList.add('hidden');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            });
+
+            // Initial Filter & Viewed Status
             const viewedPosters = getViewedPosters();
             gallery.querySelectorAll('.poster-card').forEach(item => {
                 const isMainVisible = item.getAttribute('data-main-visible') !== 'false';
@@ -556,6 +557,23 @@
                     item.classList.add('viewed');
                 }
             });
+        });
+        
+        // --- Konami Code Easter Egg ---
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let userInput = [];
+        document.addEventListener('keydown', (e) => {
+            userInput.push(e.key);
+            userInput.splice(-konamiCode.length - 1, userInput.length - konamiCode.length);
+            if (userInput.join('').includes(konamiCode.join(''))) {
+                const secretPoster = document.getElementById('secret-poster');
+                if (secretPoster) {
+                    secretPoster.removeAttribute('data-main-visible'); // This is the key change
+                    secretPoster.classList.remove('hidden');
+                    alert('SECRET POSTER UNLOCKED!');
+                }
+                userInput = [];
+            }
         });
 
     </script>
