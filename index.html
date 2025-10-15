@@ -26,6 +26,7 @@
         h1, h2, h3 { font-family: 'Chakra Petch', sans-serif; }
 
         .poster-card {
+            position: relative; /* Required for the "new" indicator */
             background-color: rgba(31, 41, 55, 0.5);
             border: 1px solid #4b5563;
             backdrop-filter: blur(8px);
@@ -42,6 +43,31 @@
             opacity: 0; transform: scale(0.9); max-height: 0;
             margin-top: 0; margin-bottom: 0; padding-top: 0;
             padding-bottom: 0; border-width: 0;
+        }
+
+        /* "New" Indicator styles */
+        .new-indicator {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            background-color: #a78bfa;
+            color: #111827;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(167, 139, 250, 0.7);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: scale(1);
+        }
+        .poster-card.viewed .new-indicator {
+            opacity: 0;
+            transform: scale(0);
         }
 
         #modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
@@ -121,39 +147,69 @@
 
         <div id="filter-container" class="flex justify-center flex-wrap gap-2 md:gap-4 mb-12">
             <button class="filter-btn active px-4 py-2 rounded-md text-sm font-medium" data-filter="all">ALL</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="featured">FEATURED</button>
             <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="glass">LIQUID GLASS</button>
             <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="ai">AI EXPERIMENTS</button>
             <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="typography">TYPOGRAPHY</button>
         </div>
 
         <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" onclick="openModal(this)">
-                <img loading="lazy" src="posters/SLEEP TOKEN.png" alt="Sleep Token" class="w-full h-auto" data-large-src="posters/SLEEP TOKEN.png">
-                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Sleep Token - Infinite Baths</h3><p class="text-gray-400 mt-1">Monoprinting and digitalisation test along with lyric prints.</p></div>
-            </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" onclick="openModal(this)">
-                <img loading="lazy" src="posters/a4color_esdeekid.png" alt="EsDeeKid" class="w-full h-auto" data-large-src="posters/a4color_esdeekid.png">
-                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">EsDeeKid - Cali Man</h3><p class="text-gray-400 mt-1">Again with the liquid glass.</p></div>
-            </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="ai glass" onclick="openModal(this)">
-                <img loading="lazy" src="posters/Tyler The Creator.png" alt="Tyler The Creator" class="w-full h-auto" data-large-src="posters/Tyler The Creator.png">
-                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3><p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p></div>
-            </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" onclick="openModal(this)">
-                <img loading="lazy" src="posters/heavyweight.png" alt="Yeat" class="w-full h-auto" data-large-src="posters/heavyweight.png">
-                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Yeat - Hëavyweight</h3><p class="text-gray-400 mt-1">Full brainstorming.</p></div>
+            
+             <!-- NEW Full-Width Poster Placeholder -->
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-poster-id="featured-2" onclick="openModal(this)">
+                <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/featured2.png" alt="Featured2" class="w-full h-auto" data-large-src="comp_posters/featured2.png">
+                <div class="p-5">
+                    <h3 class="text-2xl font-semibold text-violet-400">Postermania Banner</h3>
+                    <p class="text-gray-400 mt-1">The new Postermania featured banner.</p>
+                </div>
             </div>
 
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" onclick="openModal(this)">
-                <img loading="lazy" src="posters/Untitled-1.png" alt="Jessie Murph" class="w-full h-auto" data-large-src="posters/Untitled-1.png">
+            <!-- OLD Featured Poster (Now Archived from main view) -->
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-main-visible="false" data-poster-id="featured-1" onclick="openModal(this)">
+                <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/featured.png" alt="Featured" class="w-full h-auto" data-large-src="comp_posters/featured.png">
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-violet-400">Featured Postermania Banner</h3>
+                    <p class="text-gray-400 mt-1">This was the first featured poster. It's now archived from the 'All' view.</p>
+                </div>
+            </div>
+
+
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-1" onclick="openModal(this)">
+                <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/SLEEP TOKEN.jpg" alt="Sleep Token" class="w-full h-auto" data-large-src="comp_posters/SLEEP TOKEN.jpg">
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Sleep Token - Infinite Baths</h3><p class="text-gray-400 mt-1">Monoprinting and digitalisation test along with lyric prints.</p></div>
+            </div>
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-2" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/a4color_esdeekid.jpg" alt="EsDeeKid" class="w-full h-auto" data-large-src="comp_posters/a4color_esdeekid.jpg">
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">EsDeeKid - Cali Man</h3><p class="text-gray-400 mt-1">Again with the liquid glass.</p></div>
+            </div>
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="ai glass" data-poster-id="poster-3" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/Tyler The Creator.jpg" alt="Tyler The Creator" class="w-full h-auto" data-large-src="comp_posters/Tyler The Creator.jpg">
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3><p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p></div>
+            </div>
+
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-4" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/heavyweight.jpg" alt="Yeat" class="w-full h-auto" data-large-src="comp_posters/heavyweight.jpg">
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Yeat - Hëavyweight</h3><p class="text-gray-400 mt-1">Full brainstorming.</p></div>
+            </div>
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-5" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/Untitled-1.jpg" alt="Jessie Murph" class="w-full h-auto" data-large-src="comp_posters/Untitled-1.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Jessie Murph - Always Been You</h3><p class="text-gray-400 mt-1">Taking requests from my friends and their favourite artists.</p></div>
             </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" onclick="openModal(this)">
-                <img loading="lazy" src="posters/dave.png" alt="Dave" class="w-full h-auto" data-large-src="posters/dave.png">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-6" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/dave.jpg" alt="Dave" class="w-full h-auto" data-large-src="comp_posters/dave.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Santan Dave - We Are All Alone In This Together</h3><p class="text-gray-400 mt-1">Typography and texture printing.</p></div>
             </div>
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" onclick="openModal(this)">
-                <img loading="lazy" src="posters/Yeat.png" alt="Yeat" class="w-full h-auto" data-large-src="posters/Yeat.png">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-7" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="comp_posters/Yeat.jpg" alt="Yeat" class="w-full h-auto" data-large-src="comp_posters/Yeat.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Yeat - Comë n Go</h3><p class="text-gray-400 mt-1">A test with Apple's Liquid Glass technique.</p></div>
             </div>
         </div>
@@ -167,31 +223,31 @@
             <form action="https://formspree.io/f/mwprwrzj" method="POST" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="Artist" class="block text-sm font-medium text-gray-400 mb-2">Artist Name</label>
-                        <input type="text" name="artist" id="artist" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                        <label for="artist" class="block text-sm font-medium text-gray-400 mb-2">Artist Name</label>
+                        <input type="text" name="Artist" id="artist" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                     <div>
-                        <label for="Album" class="block text-sm font-medium text-gray-400 mb-2">Album / Single Name</label>
-                        <input type="text" name="album" id="album" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                        <label for="album" class="block text-sm font-medium text-gray-400 mb-2">Album / Single Name</label>
+                        <input type="text" name="Album" id="album" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                 </div>
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="Song" class="block text-sm font-medium text-gray-400 mb-2">Specific Song (Optional)</label>
-                        <input type="text" name="song" id="song" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                        <label for="song" class="block text-sm font-medium text-gray-400 mb-2">Specific Song (Optional)</label>
+                        <input type="text" name="Song" id="song" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                     <div>
-                        <label for="Style" class="block text-sm font-medium text-gray-400 mb-2">Desired Style (e.g., Liquid Glass, Vintage)</label>
-                        <input type="text" name="style" id="style" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                        <label for="style" class="block text-sm font-medium text-gray-400 mb-2">Desired Style (e.g., Liquid Glass, Vintage)</label>
+                        <input type="text" name="Style" id="style" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                 </div>
                  <div>
-                    <label for="Email" class="block text-sm font-medium text-gray-400 mb-2">Your Email (To notify you if it gets made)</label>
-                    <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                    <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Your Email (To notify you if it gets made)</label>
+                    <input type="email" name="Email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                 </div>
                 <div>
                     <label for="Details" class="block text-sm font-medium text-gray-400 mb-2">Additional Details</label>
-                    <textarea name="details" id="details" rows="4" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition"></textarea>
+                    <textarea name="Details" id="details" rows="4" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition"></textarea>
                 </div>
                 <button type="submit" class="w-full filter-btn active px-4 py-3 rounded-md font-bold">SUBMIT REQUEST</button>
             </form>
@@ -257,9 +313,31 @@
         // --- State Variables ---
         let currentPosterIndex = 0;
         let visiblePosters = [];
+        const VIEWED_POSTERS_KEY = 'viewedPosters';
+
+        // --- Helper Functions ---
+        const getViewedPosters = () => {
+            const viewed = localStorage.getItem(VIEWED_POSTERS_KEY);
+            return viewed ? new Set(JSON.parse(viewed)) : new Set();
+        };
+
+        const setViewedPosters = (viewedSet) => {
+            localStorage.setItem(VIEWED_POSTERS_KEY, JSON.stringify(Array.from(viewedSet)));
+        };
+
+        const markPosterAsViewed = (element) => {
+            const posterId = element.dataset.posterId;
+            if (posterId && !element.classList.contains('viewed')) {
+                const viewedPosters = getViewedPosters();
+                viewedPosters.add(posterId);
+                setViewedPosters(viewedPosters);
+                element.classList.add('viewed');
+            }
+        };
 
         // --- Modal & Lightbox Logic ---
         function updateModalContent(posterElement) {
+            markPosterAsViewed(posterElement); // Mark as viewed on navigation
             const img = posterElement.querySelector('img');
             const title = posterElement.querySelector('h3').innerText;
             const description = posterElement.querySelector('p').innerText;
@@ -331,10 +409,20 @@
 
             gallery.querySelectorAll('.poster-card').forEach(item => {
                 const itemCategories = item.getAttribute('data-category').split(' ');
-                if (filterValue === 'all' || itemCategories.includes(filterValue)) {
-                    item.classList.remove('hidden');
+                const isMainVisible = item.getAttribute('data-main-visible') !== 'false';
+
+                if (filterValue === 'all') {
+                    if (isMainVisible) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
                 } else {
-                    item.classList.add('hidden');
+                    if (itemCategories.includes(filterValue)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
                 }
             });
         });
@@ -353,8 +441,23 @@
             scrollObserver.observe(el);
         });
 
+        // --- Initial filter on page load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewedPosters = getViewedPosters();
+            gallery.querySelectorAll('.poster-card').forEach(item => {
+                const isMainVisible = item.getAttribute('data-main-visible') !== 'false';
+                if (!isMainVisible) {
+                    item.classList.add('hidden');
+                }
+
+                const posterId = item.dataset.posterId;
+                if (posterId && viewedPosters.has(posterId)) {
+                    item.classList.add('viewed');
+                }
+            });
+        });
+
     </script>
 </body>
 </html>
-
 
