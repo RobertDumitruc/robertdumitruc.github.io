@@ -109,41 +109,24 @@
 
         .tool-tag { background-color: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.3); color: #a78bfa; padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; text-transform: uppercase; }
         
-        /* --- Preloader Styles --- */
         #preloader {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: #111827;
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Mono', monospace;
-            color: #a78bfa;
-            font-size: 1.25rem;
-            opacity: 1;
-            transition: opacity 0.5s ease;
+            background-color: #111827; z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Space Mono', monospace; color: #a78bfa; font-size: 1.25rem;
+            opacity: 1; transition: opacity 0.5s ease;
         }
         #preloader.hidden { opacity: 0; pointer-events: none; }
-        #preloader-text::after {
-            content: '_';
-            animation: blink 1s step-end infinite;
-        }
+        #preloader-text::after { content: '_'; animation: blink 1s step-end infinite; }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <span id="preloader-text">DECRYPTING_FILES...</span>
-    </div>
-
-    <!-- Custom Cursor -->
+    <div id="preloader"><span id="preloader-text">DECRYPTING_FILES...</span></div>
     <div class="cursor-outline"></div>
     <div class="cursor-dot"></div>
 
-    <!-- Header Section -->
     <header class="sticky top-0 z-20 bg-gray-900/70 backdrop-blur-md border-b border-gray-700">
         <div class="container mx-auto px-6 py-4">
             <h1 id="glitch-heading" data-text="POSTERMANIA" class="text-2xl md:text-3xl font-bold text-white tracking-wider">POSTERMANIA</h1>
@@ -151,7 +134,6 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
         <p class="text-center text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
             Welcome to my personal gallery. Each poster represents a story, a burst of creativity, or a design challenge. Click any poster to see a larger version and learn more.
@@ -167,38 +149,22 @@
         <div id="filter-container" class="flex justify-center flex-wrap gap-2 md:gap-4 mb-12">
             <button class="filter-btn active px-4 py-2 rounded-md text-sm font-medium" data-filter="all">ALL</button>
             <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="featured">FEATURED</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="request">COMMUNITY</button>
             <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="glass">LIQUID GLASS</button>
             <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="ai">AI EXPERIMENTS</button>
             <button class="filter-btn px-4 py-2 rounded-md text-sm font-medium" data-filter="typography">TYPOGRAPHY</button>
         </div>
 
         <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            
-             <!-- NEW Full-Width Poster Placeholder -->
             <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-poster-id="featured-2" data-tools="Photoshop,Illustrator" onclick="openModal(this)">
                 <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/featured2.png" alt="Featured2" class="w-full h-auto" data-large-src="posters/featured2.png">
-                <div class="p-5">
-                    <h3 class="text-2xl font-semibold text-violet-400">Postermania Banner</h3>
-                    <p class="text-gray-400 mt-1">The new Postermania featured banner.</p>
-                </div>
+                <div class="p-5"><h3 class="text-2xl font-semibold text-violet-400">Postermania Banner</h3><p class="text-gray-400 mt-1">The new Postermania featured banner.</p></div>
             </div>
-
-            <!-- OLD Featured Poster (Now Archived from main view) -->
             <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer lg:col-span-3" data-category="featured" data-main-visible="false" data-poster-id="featured-1" data-tools="Photoshop" onclick="openModal(this)">
                 <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/featured.png" alt="Featured" class="w-full h-auto" data-large-src="posters/featured.png">
-                <div class="p-5">
-                    <h3 class="text-xl font-semibold text-violet-400">Featured Postermania Banner</h3>
-                    <p class="text-gray-400 mt-1">This was the first featured poster. It's now archived from the 'All' view.</p>
-                </div>
-            </div>
-
-
-            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-1" data-tools="Monoprint,Photoshop" onclick="openModal(this)">
-                <span class="new-indicator">!</span>
-                <img loading="lazy" src="posters/SLEEP TOKEN.jpg" alt="Sleep Token" class="w-full h-auto" data-large-src="posters/SLEEP TOKEN.jpg">
-                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Sleep Token - Infinite Baths</h3><p class="text-gray-400 mt-1">Monoprinting and digitalisation test along with lyric prints.</p></div>
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Featured Postermania Banner</h3><p class="text-gray-400 mt-1">This was the first featured poster. It's now archived from the 'All' view.</p></div>
             </div>
             <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="glass" data-poster-id="poster-2" data-tools="Photoshop" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
@@ -210,7 +176,6 @@
                 <img loading="lazy" src="posters/Tyler The Creator.jpg" alt="Tyler The Creator" class="w-full h-auto" data-large-src="posters/Tyler The Creator.jpg">
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Tyler The Creator - See You Again</h3><p class="text-gray-400 mt-1">AI experimentation along with liquid glass technique.</p></div>
             </div>
-
             <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography" data-poster-id="poster-4" data-tools="Photoshop" onclick="openModal(this)">
                  <span class="new-indicator">!</span>
                 <img loading="lazy" src="posters/heavyweight.jpg" alt="Yeat" class="w-full h-auto" data-large-src="posters/heavyweight.jpg">
@@ -232,6 +197,20 @@
                 <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Yeat - Comë n Go</h3><p class="text-gray-400 mt-1">A test with Apple's Liquid Glass technique.</p></div>
             </div>
         </div>
+
+        <h2 class="text-3xl font-bold text-violet-400 text-center my-16 animate-on-scroll">Community Requests</h2>
+        <div id="community-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography request" data-poster-id="poster-8" data-tools="Photoshop" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="posters/gunsnroses.png" alt="Guns n' Roses" class="w-full h-auto" data-large-src="posters/gunsnroses.png">
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">Guns n' Roses - Appetite for Destruction</h3><p class="text-gray-400 mt-1">Request from Alfie.</p></div>
+            </div>
+            <div class="poster-card animate-on-scroll rounded-lg overflow-hidden cursor-pointer" data-category="typography request" data-poster-id="poster-9" data-tools="Photoshop" onclick="openModal(this)">
+                 <span class="new-indicator">!</span>
+                <img loading="lazy" src="posters/afterhours.png" alt="After Hours" class="w-full h-auto" data-large-src="posters/afterhours.png">
+                <div class="p-5"><h3 class="text-xl font-semibold text-violet-400">The Weeknd - After Hours</h3><p class="text-gray-400 mt-1">Request from Kyle.</p></div>
+            </div>
+        </div>
     </main>
 
      <!-- Transmission Log Section -->
@@ -239,8 +218,8 @@
         <div id="transmission-log" class="p-8 rounded-lg border border-gray-700 bg-gray-800/50 backdrop-blur-md max-w-3xl mx-auto">
             <h2 class="text-2xl font-bold text-violet-400 mb-4">TRANSMISSION LOG</h2>
             <ul class="space-y-2 text-gray-400 font-mono text-sm">
-                <li><span class="text-violet-400 mr-2">[20251014-2055-F8E1]</span>&gt; REQ_RECEIVED: Poster for 'Guns n Roses'. STATUS: <span class="text-yellow-400">IN_QUEUE</span></li>
-                <li><span class="text-violet-400 mr-2">[20251014-2056-K4G5]</span>&gt; REQ_RECEIVED: Poster for 'The Weeknd'. STATUS: <span class="text-yellow-400">IN_QUEUE</span></li>
+                <li><span class="text-violet-400 mr-2">[20251014-2055-F8E1]</span>&gt; REQ_RECEIVED: 'Guns n Roses'. STATUS: <span class="text-green-400">COMPLETED</span></li>
+                <li><span class="text-violet-400 mr-2">[20251014-2056-K4G5]</span>&gt; REQ_RECEIVED: 'The Weeknd'. STATUS: <span class="text-green-400">COMPLETED</span></li>
             </ul>
         </div>
     </section>
@@ -251,23 +230,51 @@
             <h2 class="text-2xl font-bold text-violet-400 text-center mb-2">REQUEST A POSTER</h2>
             <p class="text-center text-gray-400 mb-6">Have an idea for a poster? Fill out the form below and I'll consider it for a future design. (with credits towards you)</p>
             <form action="https://formspree.io/f/mwprwrzj" method="POST" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="artist" class="block text-sm font-medium text-gray-400 mb-2">Artist Name</label>
-                        <input type="text" name="Artist" id="artist" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
-                    </div>
-                    <div>
-                        <label for="album" class="block text-sm font-medium text-gray-400 mb-2">Album / Single Name</label>
-                        <input type="text" name="Album" id="album" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                <!-- New Type Selector -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Select Request Type</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" id="type-artist" class="filter-btn active w-full py-2">Artist / Band</button>
+                        <button type="button" id="type-celebrity" class="filter-btn w-full py-2">Celebrity</button>
                     </div>
                 </div>
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+    
+                <!-- Artist Fields (Visible by default) -->
+                <div id="artist-fields">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="artist" class="block text-sm font-medium text-gray-400 mb-2">Artist Name</label>
+                            <input type="text" name="Artist" id="artist" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                        </div>
+                        <div>
+                            <label for="album" class="block text-sm font-medium text-gray-400 mb-2">Album / Single Name</label>
+                            <input type="text" name="Album" id="album" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                        </div>
+                    </div>
+                     <div class="mt-6">
                         <label for="song" class="block text-sm font-medium text-gray-400 mb-2">Specific Song (Optional)</label>
                         <input type="text" name="Song" id="song" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
-                    <div>
-                        <label for="style" class="block text-sm font-medium text-gray-400 mb-2">Desired Style (e.g., Liquid Glass, Vintage)</label>
+                </div>
+    
+                <!-- Celebrity Fields (Hidden by default) -->
+                <div id="celebrity-fields" class="hidden">
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="celebrity-name" class="block text-sm font-medium text-gray-400 mb-2">Celebrity Name</label>
+                            <input type="text" name="Celebrity" id="celebrity-name" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
+                        </div>
+                         <div>
+                            <label for="celebrity-context" class="block text-sm font-medium text-gray-400 mb-2">Context / Theme</label>
+                            <input type="text" name="Context" id="celebrity-context" class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition" placeholder="e.g., Movie role, event, etc.">
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Shared Fields -->
+                <div class="pt-6 border-t border-gray-700/50">
+                     <div>
+                        <label for="style" class="block text-sm font-medium text-gray-400 mb-2">Desired Style (e.g., Liquid Glass)</label>
                         <input type="text" name="Style" id="style" required class="w-full bg-gray-900/50 border border-gray-600 rounded-md p-3 text-white focus:ring-violet-400 focus:border-violet-400 transition">
                     </div>
                 </div>
@@ -344,10 +351,18 @@
         const toTopButton = document.getElementById('to-top-button');
         const filterContainer = document.getElementById('filter-container');
         const gallery = document.getElementById('gallery');
+        const communityGallery = document.getElementById('community-gallery');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const preloader = document.getElementById('preloader');
-
+        const typeArtistBtn = document.getElementById('type-artist');
+        const typeCelebrityBtn = document.getElementById('type-celebrity');
+        const artistFields = document.getElementById('artist-fields');
+        const celebrityFields = document.getElementById('celebrity-fields');
+        const artistNameInput = document.getElementById('artist');
+        const albumNameInput = document.getElementById('album');
+        const celebrityNameInput = document.getElementById('celebrity-name');
+        
         // --- State Variables ---
         let currentPosterIndex = 0;
         let visiblePosters = [];
@@ -370,6 +385,17 @@
                 viewedPosters.add(posterId);
                 setViewedPosters(viewedPosters);
                 element.classList.add('viewed');
+            }
+        };
+        
+        const handleDirectLink = () => {
+            const hash = window.location.hash;
+            if (hash.startsWith('#poster=')) {
+                const posterId = hash.substring('#poster='.length);
+                const posterToOpen = document.querySelector(`.poster-card[data-poster-id="${posterId}"]`);
+                if (posterToOpen) {
+                    openModal(posterToOpen);
+                }
             }
         };
 
@@ -415,7 +441,7 @@
         }
         
         function openModal(element) {
-            visiblePosters = Array.from(gallery.querySelectorAll('.poster-card:not(.hidden)'));
+            visiblePosters = Array.from(document.querySelectorAll('.poster-card:not(.hidden)'));
             currentPosterIndex = visiblePosters.indexOf(element);
             
             updateModalContent(element);
@@ -473,7 +499,7 @@
 
             const filterValue = event.target.getAttribute('data-filter');
 
-            gallery.querySelectorAll('.poster-card').forEach(item => {
+            document.querySelectorAll('.poster-card').forEach(item => {
                 const itemCategories = item.getAttribute('data-category').split(' ');
                 const isMainVisible = item.getAttribute('data-main-visible') !== 'false';
 
@@ -491,6 +517,29 @@
                     }
                 }
             });
+        });
+
+        // --- Form Type Switching Logic ---
+        typeArtistBtn.addEventListener('click', () => {
+            typeArtistBtn.classList.add('active');
+            typeCelebrityBtn.classList.remove('active');
+            artistFields.classList.remove('hidden');
+            celebrityFields.classList.add('hidden');
+
+            artistNameInput.required = true;
+            albumNameInput.required = true;
+            celebrityNameInput.required = false;
+        });
+
+        typeCelebrityBtn.addEventListener('click', () => {
+            typeCelebrityBtn.classList.add('active');
+            typeArtistBtn.classList.remove('active');
+            celebrityFields.classList.remove('hidden');
+            artistFields.classList.add('hidden');
+
+            celebrityNameInput.required = true;
+            artistNameInput.required = false;
+            albumNameInput.required = false;
         });
 
         // --- Scroll Animation Logic ---
@@ -546,13 +595,14 @@
                     preloader.classList.add('hidden');
                      setTimeout(() => {
                         preloader.style.display = 'none';
+                        handleDirectLink(); // Check for direct links after preloader is gone
                     }, 500);
                 }
             }, 750);
 
             // Initial Filter & Viewed Status
             const viewedPosters = getViewedPosters();
-            gallery.querySelectorAll('.poster-card').forEach(item => {
+            document.querySelectorAll('.poster-card').forEach(item => {
                 const isMainVisible = item.getAttribute('data-main-visible') !== 'false';
                 if (!isMainVisible) {
                     item.classList.add('hidden');
@@ -564,7 +614,6 @@
                 }
             });
         });
-
     </script>
 </body>
 </html>
