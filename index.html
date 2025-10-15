@@ -21,39 +21,48 @@
                 linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
-            cursor: none; /* Hide the default cursor */
         }
         
         h1, h2, h3 { font-family: 'Chakra Petch', sans-serif; }
 
         /* --- Interactive Cursor Styles --- */
         .cursor-dot, .cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-            transition: transform 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out;
+            display: none; /* Hidden by default for touch devices */
         }
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #a78bfa;
-            box-shadow: 0 0 10px #a78bfa, 0 0 20px #a78bfa;
-        }
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(167, 139, 250, 0.5);
-        }
-        body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-dot {
-            transform: translate(-50%, -50%) scale(0.5);
-        }
-        body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-outline {
-            transform: translate(-50%, -50%) scale(1.5);
-            border-color: rgba(167, 139, 250, 1);
+        
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none; /* Hide the default cursor only on hover-capable devices */
+            }
+            .cursor-dot, .cursor-outline {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                z-index: 9999;
+                pointer-events: none;
+                transition: transform 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out;
+            }
+            .cursor-dot {
+                width: 8px;
+                height: 8px;
+                background-color: #a78bfa;
+                box-shadow: 0 0 10px #a78bfa, 0 0 20px #a78bfa;
+            }
+            .cursor-outline {
+                width: 40px;
+                height: 40px;
+                border: 2px solid rgba(167, 139, 250, 0.5);
+            }
+            body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-dot {
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-outline {
+                transform: translate(-50%, -50%) scale(1.5);
+                border-color: rgba(167, 139, 250, 1);
+            }
         }
 
 
@@ -441,16 +450,18 @@
         }
 
         // --- Event Listeners ---
-        window.addEventListener('mousemove', e => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            window.addEventListener('mousemove', e => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+        }
 
         document.addEventListener('keydown', (event) => {
             if (modal.classList.contains('invisible')) return;
