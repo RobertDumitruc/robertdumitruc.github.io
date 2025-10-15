@@ -21,9 +21,41 @@
                 linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
+            cursor: none; /* Hide the default cursor */
         }
         
         h1, h2, h3 { font-family: 'Chakra Petch', sans-serif; }
+
+        /* --- Interactive Cursor Styles --- */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transition: transform 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #a78bfa;
+            box-shadow: 0 0 10px #a78bfa, 0 0 20px #a78bfa;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(167, 139, 250, 0.5);
+        }
+        body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-dot {
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        body:has(a:hover, button:hover, input:hover, textarea:hover) .cursor-outline {
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: rgba(167, 139, 250, 1);
+        }
+
 
         .poster-card {
             position: relative; /* Required for the "new" indicator */
@@ -120,9 +152,25 @@
             background-color: #a78bfa; border-color: #a78bfa;
             color: #111827; font-weight: bold;
         }
+
+        /* --- Transmission Log Styles --- */
+        #transmission-log h2::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+            color: #a78bfa;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        #transmission-log li {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-outline"></div>
+    <div class="cursor-dot"></div>
 
     <!-- Header Section -->
     <header class="sticky top-0 z-20 bg-gray-900/70 backdrop-blur-md border-b border-gray-700">
@@ -214,6 +262,17 @@
             </div>
         </div>
     </main>
+
+     <!-- Transmission Log Section -->
+    <section class="container mx-auto px-6 py-12">
+        <div id="transmission-log" class="p-8 rounded-lg border border-gray-700 bg-gray-800/50 backdrop-blur-md max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold text-violet-400 mb-4">TRANSMISSION LOG</h2>
+            <ul class="space-y-2 text-gray-400 font-mono text-sm">
+                <li><span class="text-violet-400 mr-2">[20251014-2055-F8E1]</span>&gt; REQ_RECEIVED: Poster for 'Guns n Roses'. STATUS: <span class="text-yellow-400">IN_QUEUE</span></li>
+                <li><span class="text-violet-400 mr-2">[20251014-2056-K4G5]</span>&gt; REQ_RECEIVED: Poster for 'The Weeknd'. STATUS: <span class="text-yellow-400">IN_QUEUE</span></li>
+            </ul>
+        </div>
+    </section>
     
     <!-- Poster Request Form Section -->
     <section id="contact" class="container mx-auto px-6 py-12">
@@ -297,6 +356,8 @@
 
     <script>
         // --- DOM Elements ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modal-img');
         const modalTitle = document.getElementById('modal-title');
@@ -380,6 +441,17 @@
         }
 
         // --- Event Listeners ---
+        window.addEventListener('mousemove', e => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
         document.addEventListener('keydown', (event) => {
             if (modal.classList.contains('invisible')) return;
             if (event.key === 'Escape') closeModal();
@@ -440,6 +512,24 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             scrollObserver.observe(el);
         });
+        
+        // --- Transmission Log Animation ---
+        const logObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const logItems = entry.target.querySelectorAll('li');
+                    logItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                        }, index * 200);
+                    });
+                    logObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        logObserver.observe(document.getElementById('transmission-log'));
+
 
         // --- Initial filter on page load ---
         document.addEventListener('DOMContentLoaded', () => {
