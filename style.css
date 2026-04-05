@@ -1,13 +1,13 @@
 :root {
-  --bg: #0a0d12;
-  --bg-deep: #121821;
-  --surface: rgba(16, 22, 31, 0.82);
-  --surface-strong: #151c26;
-  --ink: #f4f7fb;
-  --muted: #9ba7b6;
-  --accent: #7cb3ff;
-  --accent-soft: rgba(124, 179, 255, 0.14);
-  --accent-warm: #ffb44f;
+  --bg: #080511;
+  --bg-deep: #120b22;
+  --surface: rgba(17, 12, 32, 0.82);
+  --surface-strong: #171129;
+  --ink: #f7efff;
+  --muted: #b6a7cc;
+  --accent: #ff6fcf;
+  --accent-soft: rgba(255, 111, 207, 0.14);
+  --accent-warm: #8b7dff;
   --line: rgba(255, 255, 255, 0.1);
   --shadow: 0 30px 70px rgba(0, 0, 0, 0.38);
 }
@@ -26,9 +26,9 @@ body {
   font-family: "Manrope", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top right, rgba(124, 179, 255, 0.16), transparent 24%),
-    radial-gradient(circle at bottom left, rgba(255, 180, 79, 0.1), transparent 26%),
-    linear-gradient(180deg, var(--bg) 0%, #0f141c 56%, var(--bg-deep) 100%);
+    radial-gradient(circle at top right, rgba(255, 111, 207, 0.18), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(139, 125, 255, 0.16), transparent 26%),
+    linear-gradient(180deg, var(--bg) 0%, #10081d 56%, var(--bg-deep) 100%);
   overflow-x: hidden;
 }
 
@@ -48,7 +48,7 @@ body::before {
   height: 20rem;
   top: 4rem;
   right: -4rem;
-  background: rgba(124, 179, 255, 0.12);
+  background: rgba(255, 111, 207, 0.13);
 }
 
 body::after {
@@ -56,7 +56,7 @@ body::after {
   height: 18rem;
   left: -4rem;
   bottom: 4rem;
-  background: rgba(255, 180, 79, 0.1);
+  background: rgba(139, 125, 255, 0.12);
 }
 
 .page-shell {
@@ -99,12 +99,12 @@ body::after {
   display: grid;
   place-items: center;
   border-radius: 18px;
-  background: linear-gradient(135deg, var(--accent), #3565ff);
-  color: #08101a;
+  background: linear-gradient(135deg, var(--accent), #7b61ff);
+  color: #14091d;
   font-family: "Archivo Black", sans-serif;
   font-size: 1.35rem;
   letter-spacing: 0.06em;
-  box-shadow: 0 14px 30px rgba(53, 101, 255, 0.28);
+  box-shadow: 0 14px 30px rgba(255, 111, 207, 0.28);
 }
 
 .eyebrow,
@@ -190,13 +190,13 @@ h2 {
 .project-card:hover,
 .project-card:focus-visible {
   transform: translateY(-5px);
-  background: #1a2230;
-  border-color: rgba(124, 179, 255, 0.34);
+  background: #211638;
+  border-color: rgba(255, 111, 207, 0.3);
   box-shadow: 0 20px 42px rgba(0, 0, 0, 0.34);
 }
 
 .project-card:focus-visible {
-  outline: 3px solid rgba(124, 179, 255, 0.2);
+  outline: 3px solid rgba(255, 111, 207, 0.22);
   outline-offset: 4px;
 }
 
@@ -285,13 +285,13 @@ h2 {
 }
 
 .project-action:focus-visible {
-  outline: 3px solid rgba(124, 179, 255, 0.2);
+  outline: 3px solid rgba(255, 111, 207, 0.22);
   outline-offset: 3px;
 }
 
 .primary-action {
   background: var(--accent);
-  color: #08101a;
+  color: #17091f;
 }
 
 .secondary-action {
