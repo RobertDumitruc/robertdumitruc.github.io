@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URINETOWN | Robert Dumitruc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="page-shell detail-shell">
+    <main class="detail-page">
+      <a class="detail-back" href="../index.html">Back to landing page</a>
+      <section class="detail-hero">
+        <div class="detail-thumb image-lightbox-trigger" data-fullsrc="../assets/work/urinetown/URINETOWN3.png" data-alt="URINETOWN main poster artwork">
+          <img
+            src="../assets/work/urinetown/previews/urinetown-poster.jpg"
+            alt="URINETOWN main poster artwork"
+            class="detail-image contain-image"
+            decoding="async"
+          >
+        </div>
+        <div class="detail-copy">
+          <p class="section-label">Poster Design</p>
+          <h1>URINETOWN</h1>
+          <p class="detail-intro">
+            A theatrical project brief resulting in a finished poster outcome as well as flyer designs and clothing mockups.
+          </p>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <h2>My Notes</h2>
+        <p>
+          URINETOWN's project brief was a good starting point to learn more about poster compositions,
+          but also practice new techniques like creating mockups of potential merchandise using the
+          musical's logo I created for the final poster. This project came with many back and forth
+          emails and many changes that had to be made, however it showed me the workflow of what a
+          designer goes through and it taught me new techniques along the way as well. I am very proud
+          of how great the final designs came out and I would love to take on another project like this
+          in the future.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Project Assets</h2>
+        <div class="asset-grid">
+          <figure class="asset-card asset-card-tall">
+            <div class="asset-media image-lightbox-trigger" data-fullsrc="../assets/work/urinetown/URINETOWN_flyer_front.png" data-alt="URINETOWN flyer front">
+              <img
+                src="../assets/work/urinetown/previews/urinetown-flyer-front.jpg"
+                alt="URINETOWN flyer front"
+                class="asset-image contain-image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption>Flyer front</figcaption>
+          </figure>
+
+          <figure class="asset-card asset-card-tall">
+            <div class="asset-media image-lightbox-trigger" data-fullsrc="../assets/work/urinetown/URINETOWN_flyer_back.png" data-alt="URINETOWN flyer back">
+              <img
+                src="../assets/work/urinetown/previews/urinetown-flyer-back.jpg"
+                alt="URINETOWN flyer back"
+                class="asset-image contain-image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption>Flyer back</figcaption>
+          </figure>
+
+          <figure class="asset-card">
+            <div class="asset-media image-lightbox-trigger" data-fullsrc="../assets/work/urinetown/Black T-Shirt URINETOWN.png" data-alt="URINETOWN black T-shirt mockup">
+              <img
+                src="../assets/work/urinetown/previews/urinetown-shirt-black.jpg"
+                alt="URINETOWN black T-shirt mockup"
+                class="asset-image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption>Black T-shirt mockup</figcaption>
+          </figure>
+
+          <figure class="asset-card">
+            <div class="asset-media image-lightbox-trigger" data-fullsrc="../assets/work/urinetown/White T-Shirt URINETOWN.png" data-alt="URINETOWN white T-shirt mockup">
+              <img
+                src="../assets/work/urinetown/previews/urinetown-shirt-white.jpg"
+                alt="URINETOWN white T-shirt mockup"
+                class="asset-image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption>White T-shirt mockup</figcaption>
+          </figure>
+
+          <figure class="asset-card">
+            <div class="asset-media image-lightbox-trigger" data-fullsrc="../assets/work/urinetown/Hoodies Mockup.png" data-alt="URINETOWN hoodies mockup">
+              <img
+                src="../assets/work/urinetown/previews/urinetown-hoodies.jpg"
+                alt="URINETOWN hoodies mockup"
+                class="asset-image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption>Hoodies mockup</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="lightbox-modal" id="image-lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Close image view">&times;</button>
+    <div class="lightbox-stage">
+      <img id="lightbox-image" src="" alt="">
+    </div>
+  </div>
+  <script>
+    const lightbox = document.getElementById("image-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxClose = lightbox.querySelector(".lightbox-close");
+    const lightboxTriggers = document.querySelectorAll(".image-lightbox-trigger");
+
+    function openLightbox(src, alt) {
+      lightboxImage.classList.remove("is-ready");
+      lightboxImage.removeAttribute("src");
+      lightboxImage.alt = alt || "";
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      const nextImage = new Image();
+      nextImage.onload = () => {
+        lightboxImage.src = src;
+        lightboxImage.alt = alt || "";
+        lightboxImage.classList.add("is-ready");
+      };
+      nextImage.src = src;
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      lightboxImage.classList.remove("is-ready");
+      lightboxImage.removeAttribute("src");
+      lightboxImage.alt = "";
+    }
+
+    lightboxTriggers.forEach((trigger) => {
+      trigger.setAttribute("tabindex", "0");
+      trigger.setAttribute("role", "button");
+      trigger.addEventListener("click", () => {
+        openLightbox(trigger.dataset.fullsrc, trigger.dataset.alt);
+      });
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox(trigger.dataset.fullsrc, trigger.dataset.alt);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
