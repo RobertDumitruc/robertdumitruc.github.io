@@ -405,6 +405,7 @@ h2 {
 .extra-thumb {
   aspect-ratio: 16 / 10;
   margin-bottom: 1rem;
+  isolation: isolate;
 }
 
 .detail-thumb {
@@ -421,6 +422,8 @@ h2 {
 }
 
 .thumb-image {
+  position: absolute;
+  inset: 0;
   border-radius: 20px;
 }
 
