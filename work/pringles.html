@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pringles Concept | Robert Dumitruc</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="page-shell detail-shell">
+    <main class="detail-page">
+      <a class="detail-back" href="../index.html">Back to landing page</a>
+      <section class="detail-hero">
+        <div class="detail-thumb image-lightbox-trigger" data-fullsrc="../assets/work/pringles/Pringles.png" data-alt="Pringles flavour concept poster">
+          <img
+            src="../assets/work/pringles/previews/pringles-main.jpg"
+            alt="Pringles flavour concept poster"
+            class="detail-image contain-image"
+            decoding="async"
+          >
+        </div>
+        <div class="detail-copy">
+          <p class="section-label">Coursework</p>
+          <h1>New Pringles Flavour Concept</h1>
+          <p class="detail-intro">
+            A course brief built around typographic poster design, developed into a Pringles flavour
+            concept with a bold advertising direction.
+          </p>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <h2>Overview</h2>
+        <p>
+          This concept reframes a poster-based brief through a commercial product lens. The final
+          outcome combines branding, typography, and image composition to present a made-up Pringles
+          flavour as if it were part of a real campaign.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Project Assets</h2>
+        <div class="asset-grid">
+          <figure class="asset-card asset-card-tall">
+            <div class="asset-media image-lightbox-trigger" data-fullsrc="../assets/work/pringles/pringles banner mockup.png" data-alt="Pringles banner mockup">
+              <img
+                src="../assets/work/pringles/previews/pringles-banner.jpg"
+                alt="Pringles banner mockup"
+                class="asset-image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption>Banner mockup</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="lightbox-modal" id="image-lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Close image view">&times;</button>
+    <div class="lightbox-stage">
+      <img id="lightbox-image" src="" alt="">
+    </div>
+  </div>
+  <script>
+    const lightbox = document.getElementById("image-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxClose = lightbox.querySelector(".lightbox-close");
+    const lightboxTriggers = document.querySelectorAll(".image-lightbox-trigger");
+
+    function openLightbox(src, alt) {
+      lightboxImage.classList.remove("is-ready");
+      lightboxImage.removeAttribute("src");
+      lightboxImage.alt = alt || "";
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      const nextImage = new Image();
+      nextImage.onload = () => {
+        lightboxImage.src = src;
+        lightboxImage.alt = alt || "";
+        lightboxImage.classList.add("is-ready");
+      };
+      nextImage.src = src;
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      lightboxImage.classList.remove("is-ready");
+      lightboxImage.removeAttribute("src");
+      lightboxImage.alt = "";
+    }
+
+    lightboxTriggers.forEach((trigger) => {
+      trigger.setAttribute("tabindex", "0");
+      trigger.setAttribute("role", "button");
+      trigger.addEventListener("click", () => {
+        openLightbox(trigger.dataset.fullsrc, trigger.dataset.alt);
+      });
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox(trigger.dataset.fullsrc, trigger.dataset.alt);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
