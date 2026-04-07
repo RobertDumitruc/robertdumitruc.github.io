@@ -23,9 +23,17 @@
   if (config.maintenanceMode && !isMaintenancePage && isUnlocked) {
     const banner = document.createElement("div");
     banner.className = "maintenance-banner";
-    banner.textContent = "Maintenance mode is active. Visitors are being redirected to the maintenance page.";
+    banner.innerHTML = `
+      <span class="maintenance-banner-text">Maintenance mode is active. Visitors are being redirected to the maintenance page.</span>
+      <button type="button" class="maintenance-banner-button">Relock Site</button>
+    `;
     document.addEventListener("DOMContentLoaded", function () {
       document.body.prepend(banner);
+      const relockButton = banner.querySelector(".maintenance-banner-button");
+      relockButton.addEventListener("click", function () {
+        window.localStorage.removeItem(config.storageKey);
+        window.location.replace("/maintenance.html");
+      });
     });
   }
 })();
