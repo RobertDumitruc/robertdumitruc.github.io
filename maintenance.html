@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance | Robert Dumitruc</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+  <script src="site-access-config.js"></script>
+</head>
+<body>
+  <div class="page-shell maintenance-shell">
+    <main class="maintenance-card">
+      <p class="section-label">Maintenance Mode</p>
+      <h1>Website temporarily unavailable</h1>
+      <p class="maintenance-copy">
+        Robert is currently working on the website. If you have access, enter the password below to continue.
+      </p>
+      <form id="maintenance-form" class="maintenance-form">
+        <label class="maintenance-label" for="maintenance-password">Password</label>
+        <input id="maintenance-password" class="maintenance-input" type="password" autocomplete="current-password" required>
+        <button class="project-action primary-action" type="submit">Enter Website</button>
+        <p id="maintenance-message" class="maintenance-message" aria-live="polite"></p>
+      </form>
+    </main>
+  </div>
+  <script>
+    const config = window.SITE_ACCESS;
+    const form = document.getElementById("maintenance-form");
+    const input = document.getElementById("maintenance-password");
+    const message = document.getElementById("maintenance-message");
+    const params = new URLSearchParams(window.location.search);
+    const returnPath = params.get("return") || "/";
+
+    if (config && !config.maintenanceMode) {
+      window.location.replace(returnPath);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!config) {
+        message.textContent = "Access config could not be loaded.";
+        return;
+      }
+
+      if (input.value === config.password) {
+        window.localStorage.setItem(config.storageKey, "granted");
+        window.location.replace(returnPath);
+        return;
+      }
+
+      message.textContent = "Incorrect password.";
+      input.select();
+    });
+  </script>
+</body>
+</html>
