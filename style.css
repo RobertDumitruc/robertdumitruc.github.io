@@ -312,6 +312,19 @@ h2 {
   line-height: 1.1;
 }
 
+.project-badge {
+  grid-column: 2 / 4;
+  justify-self: start;
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(214, 140, 255, 0.18);
+  color: #f1c8ff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .project-meta {
   grid-column: 2 / 4;
   color: var(--muted);
