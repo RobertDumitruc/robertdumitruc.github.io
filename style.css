@@ -877,7 +877,7 @@ body.modal-open {
   }
 
   .page-shell {
-    width: min(100% - 1rem, 72rem);
+    width: min(72rem, calc(100% - 1rem));
     padding-top: 1rem;
     padding-bottom: 2rem;
   }
@@ -886,10 +886,18 @@ body.modal-open {
     padding-top: 3rem;
   }
 
+  .projects,
+  .extra-work {
+    padding: 1.5rem 0.9rem 1.25rem;
+  }
+
   .project-card {
+    width: 100%;
+    max-width: none;
     grid-template-columns: 1fr;
     text-align: center;
     justify-items: center;
+    padding: 1.2rem 1rem;
   }
 
   .project-index {
@@ -897,10 +905,17 @@ body.modal-open {
     margin-bottom: 0.35rem;
   }
 
+  .project-tag,
+  .project-badge,
   .project-name,
   .project-meta,
   .project-actions {
     grid-column: auto;
+  }
+
+  .project-actions {
+    width: 100%;
+    justify-content: center;
   }
 
   .extra-grid {
