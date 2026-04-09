@@ -692,6 +692,23 @@ h2 {
   font-size: 0.92rem;
 }
 
+.maintenance-contact {
+  margin: 1.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.maintenance-contact a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.maintenance-contact a:hover,
+.maintenance-contact a:focus-visible {
+  text-decoration: underline;
+}
+
 .video-hero {
   padding: 1.5rem;
 }
